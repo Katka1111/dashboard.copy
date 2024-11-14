@@ -1,12 +1,9 @@
-'use client'
+import { AppDashboardLayout } from "@/components/app-dashboard-layout";
 
-import { AppDashboardLayout } from "@/components/app-dashboard-layout"
-import { Dashboard } from "@/components/dashboard/dashboard"
-
-export default function DashboardPage() {
+export default function Home() {
   return (
     <AppDashboardLayout>
-      <Dashboard />
+      {/* Add your dashboard content here */}
     </AppDashboardLayout>
-  )
+  );
 }
