@@ -2,9 +2,8 @@
 
 import { ReactNode } from 'react'
 
-interface AppDashboardLayoutProps {
-  children?: ReactNode
-}
+
+
 
 export default function DashboardPage() {
   return (
