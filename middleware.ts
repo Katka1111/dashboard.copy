@@ -1,24 +1,27 @@
-import { authMiddleware } from "@clerk/nextjs";
+import { clerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-// This example protects all routes including api/trpc routes
-// Please edit this to allow other routes to be public as needed.
-export default authMiddleware({
-  // Routes that can be accessed while signed out
-  publicRoutes: ["/", "/sign-in(.*)", "/sign-up(.*)"],
-  // Routes that can always be accessed, no authentication required
-  ignoredRoutes: ["/api/webhook"],
-  // Reduce CPU time by disabling debug
-  debug: false,
-  // Prevent middleware from running on static files
-  skipPattern: /^\/(?:_next|favicon\.ico).*$/
+export const middleware = clerkMiddleware((auth, request) => {
+  const isPublicRoute = 
+    request.nextUrl.pathname.startsWith('/sign-in') ||
+    request.nextUrl.pathname.startsWith('/sign-up') ||
+    request.nextUrl.pathname === '/' ||
+    request.nextUrl.pathname.startsWith('/api/webhook');
+
+  if (!isPublicRoute) {
+    return auth.protect().then(() => NextResponse.next());
+  }
+  return NextResponse.next();
 });
 
-// Configure Middleware Matcher to optimize performance
 export const config = {
   matcher: [
-    // Exclude files with a "." (like favicon.ico)
-    // Exclude _next (static files)
-    // Match all other routes
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };

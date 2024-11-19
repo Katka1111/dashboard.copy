@@ -23,6 +23,7 @@ import {
   Tooltip
 } from 'recharts'
 import { UserButton } from "@clerk/nextjs";
+import { useClerk } from "@clerk/nextjs";
 
 interface SidebarProps {
   activeItem: string;
@@ -30,6 +31,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ activeItem, setActiveItem }) => {
+  const { signOut } = useClerk();
   const menuItems = [
     { name: 'Products', icon: LucideBarChart },
     { name: 'Contracts', icon: FileText },
@@ -69,10 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, setActiveItem }) => {
       {/* Sign Out Button */}
       <button
         className="mt-auto flex items-center w-full p-3 text-left rounded-xl transition-all duration-200 bg-pink-500 text-white hover:bg-[#40E0D0] hover:text-black"
-        onClick={() => {
-          // Add sign out logic here
-          console.log('Sign out clicked')
-        }}
+        onClick={() => signOut(() => window.location.href = "/")}
       >
         <svg
           className="mr-2 h-5 w-5"
