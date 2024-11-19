@@ -21,8 +21,10 @@ export const metadata: Metadata = {
   description: "Insurance management platform",
 };
 
-if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
-  throw new Error("Missing NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY");
+const publishableKey = "pk_test_aG9wZWZ1bC1sb3VzZS0yMS5jbGVyay5hY2NvdW50cy5kZXYk";
+
+if (!publishableKey) {
+  throw new Error("Missing publishable key");
 }
 
 export default function RootLayout({
@@ -31,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey={publishableKey}>
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           {children}
