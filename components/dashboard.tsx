@@ -20,8 +20,6 @@ import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
-  BarChart,
-  Bar,
   Tooltip
 } from 'recharts'
 import { UserButton } from "@clerk/nextjs";
