@@ -14,7 +14,7 @@ export default async function HomePage() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900">Welcome to Life Insurance</h1>
+          <h1 className="text-4xl font-bold mb-4 text-gray-900">Welcome to Life Insurance Dashboard</h1>
           <p className="text-xl text-gray-600 mb-8">Get started by signing in or signing up</p>
           <div className="space-y-4">
             <Link 
