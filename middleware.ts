@@ -1,21 +1,24 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { authMiddleware } from "@clerk/nextjs";
 
-const isPublicRoute = createRouteMatcher(['/sign-in(.*)', '/sign-up(.*)']);
-
-export default clerkMiddleware((auth, request) => {
-  if(!isPublicRoute(request)) {
-    auth.protect();
-  }
+// This example protects all routes including api/trpc routes
+// Please edit this to allow other routes to be public as needed.
+export default authMiddleware({
+  // Routes that can be accessed while signed out
+  publicRoutes: ["/", "/sign-in(.*)", "/sign-up(.*)"],
+  // Routes that can always be accessed, no authentication required
+  ignoredRoutes: ["/api/webhook"],
+  // Reduce CPU time by disabling debug
+  debug: false,
+  // Prevent middleware from running on static files
+  skipPattern: /^\/(?:_next|favicon\.ico).*$/
 });
 
+// Configure Middleware Matcher to optimize performance
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
+    // Exclude files with a "." (like favicon.ico)
+    // Exclude _next (static files)
+    // Match all other routes
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };
