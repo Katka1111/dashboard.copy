@@ -24,6 +24,7 @@ export default async function SignUpPage() {
             borderRadius: '0.375rem'
           }
         }}
+        path="/sign-up"
         routing="path"
         signInUrl="/sign-in"
         afterSignUpUrl="/dashboard"
