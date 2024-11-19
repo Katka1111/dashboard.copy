@@ -7,7 +7,6 @@ import {
   User,
   HelpCircle,
   Download,
-  Plus,
 } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -21,6 +20,8 @@ import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
+  BarChart,
+  Bar,
   Tooltip
 } from 'recharts'
 import { UserButton } from "@clerk/nextjs";
@@ -681,7 +682,7 @@ const ClaimsContent = () => {
         </CardContent>
       </Card>
       <Button>
-        <Plus className="mr-2 h-4 w-4" /> File New Claim
+        <LucideBarChart className="mr-2 h-4 w-4" /> File New Claim
       </Button>
     </div>
   )
